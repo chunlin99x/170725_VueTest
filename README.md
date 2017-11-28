@@ -179,3 +179,5 @@
 ## 7). 撤消本地修改
     git status  查看变化
     git checkout -- xxx文件  撤消指定文件的修改
+    
+xxxx
