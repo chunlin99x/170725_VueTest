@@ -11,9 +11,49 @@
 2. 列表排序
 -->
 
+<div id="app">
+  <input type="text" v-model="searchName">
+  <ul>
+    <li v-for="(p, index) in filterPersons">
+      {{index}}--{{p.name}}--{{p.age}}
+    </li>
+  </ul>
+  <button>年龄升序</button>
+  <button>年龄降序</button>
+  <button>原本显示</button>
+</div>
+
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el : '#app',
+    data : {
+      persons: [
+        {id: 1, name: 'Tom', age: 18},
+        {id: 4, name: 'Jack', age: 17},
+        {id: 3, name: 'Bob', age: 19},
+        {id: 2, name: 'Lucy', age: 16},
+        {id: 5, name: 'Marry', age: 20}
+      ],
+      searchName: '',
+    },
+    methods : {
 
+    },
+
+    computed : {
+      filterPersons () {
+        // 取出相关的属性
+        const serchName = this.searchName.trim()
+        let persons = this.persons
+
+        // 过滤数组
+        persons = persons.filter(p => p.name.indexOf(serchName)>=0)
+
+        return persons
+      }
+    }
+  })
 </script>
 </body>
 </html>
