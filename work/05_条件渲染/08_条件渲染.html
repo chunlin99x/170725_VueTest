@@ -14,10 +14,28 @@
   如果需要频繁切换 v-show 较好
 -->
 
+<div id="app">
+  <p v-if="ok">成功了</p>
+  <p v-else>失败了</p>
+
+  <p v-show="ok">成功了22222</p>
+  <p v-show="!ok">失败了22222</p>
+
+  <button @click="ok=!ok">切换</button>
+</div>
+
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-
+  new Vue({
+    el: "#app",
+    data () {
+      // 先做处理, 再产生结果
+      return {
+        ok: true
+      }
+    }
+  })
 </script>
 </body>
 </html>
