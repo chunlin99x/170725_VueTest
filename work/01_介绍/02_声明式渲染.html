@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>01_声明式渲染</title>
+</head>
+<body>
+  <div id="app">
+    {{ message }}   <!--大括号表达式: 动态显示数据-->
+  </div>
+  <!--<p>{{msg}}</p>-->
+
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript">
+    var app = new Vue({  // 配置对象: 包含n个配置选项
+      el: '#app',  // element
+      data: {  // 给页面模板使用
+        message: 'Hello Vue!'
+      }
+    })
+  </script>
+</body>
+</html>

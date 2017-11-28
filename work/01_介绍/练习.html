@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>$Title$</title>
+</head>
+<body>
+  <div id="demo">
+    <input type="text" v-model="inputTodo" v-on:keyup.enter="addTodo">
+    <ul>
+      <li v-for="(todo, index) in todos">
+        {{todo}}
+        <button v-on:click="deleteTodo(index)">X</button>
+      </li>
+    </ul>
+  </div>
+
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript">
+    //创建Vue实例(vm)
+    new Vue({  // 配置
+      el: '#demo',
+      data: {
+        inputTodo: '', // 初始化声明
+        todos: ['吃饭', '睡觉', '打代码' ]
+      },
+      methods: {
+        deleteTodo (index) {
+          // 删除todos中index对应的todo
+          this.todos.splice(index, 1)
+        },
+
+        addTodo () {
+          // 添加输入数据到todos中
+          this.todos.unshift(this.inputTodo)
+          // 清除输入数据
+          this.inputTodo = ''
+        }
+      }
+    })
+  </script>
+</body>
+</html>
