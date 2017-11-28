@@ -14,46 +14,70 @@
 2. 失去焦点才更新: .lazy
 -->
 <div id="demo">
-  <input type="text"><br>
-  <textarea></textarea>
+  <p>{{msg}}</p>
+  <input type="text" v-model="msg"><br>
+  <textarea v-model="msg"></textarea>
 
   <hr>
-  <input type="checkbox" id="checkbox">
-  <label for="checkbox"></label>
+  <input type="checkbox" id="checkbox" v-model="ok">
+  <label for="checkbox">{{ok}}</label>
 
   <hr>
-  <input type="checkbox" id="jack">
+  <input type="checkbox" id="jack" value="JACK" v-model="friends">
   <label for="jack">Jack</label>
-  <input type="checkbox" id="john">
+  <input type="checkbox" id="john" value="JOHN" v-model="friends">
   <label for="john">John</label>
-  <input type="checkbox" id="mike">
+  <input type="checkbox" id="mike" value="MICK" v-model="friends">
   <label for="mike">Mike</label>
   <br>
-  <span>Checked names:</span>
+  <span>Checked names:{{friends}}</span>
 
   <hr>
-  <input type="radio" id="female">
-  <label for="female">MALE</label>
+  <input type="radio" id="female" value="女" v-model="sex">
+  <label for="female">FEMALE</label>
   <br>
-  <input type="radio" id="male">
-  <label for="male">FEMALE</label>
+  <input type="radio" id="male" value="男" v-model="sex">
+  <label for="male">MALE</label>
   <br>
-  <span>Sex:</span>
+  <span>Sex: {{sex}}</span>
 
   <hr>
-  <select >
+  <select v-model="cityId">
     <option value="">未选择</option>
+    <option :value="city.id" v-for="(city,index) in citys" :key="index">{{city.name}}</option>
   </select>
-  <span>selection:</span>
+  <span>selection: {{cityId}}</span>
 
   <hr>
-  <input placeholder="失去焦点才更新">
-  <p>输入的数据为:</p>
+  <input placeholder="失去焦点才更新" v-model.lazy="msg2">
+  <p>输入的数据为: {{msg2}}</p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el : '#demo',
+    data : {
+      msg: 'atguigu',
+      ok: true,
+      friends: ['JOHN'],
+      sex: '女',
+      citys: [
+        {id: 1, name: 'BJ'},
+        {id: 2, name: 'SZ'},
+        {id: 3, name: 'SH'}
+      ],
+      cityId: 2,
+      msg2: 'aaa'
+    },
+    methods : {
 
+    },
+
+    computed : {
+
+    }
+  })
 </script>
 </body>
 </html>
