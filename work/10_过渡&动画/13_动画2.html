@@ -3,12 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <title>15_动画2</title>
+  <style>
+    .move-enter-active {
+      transition: all .5s;
+    }
+    .move-leave-active {
+      transition: all 1s;
+    }
+
+    .move-enter, .move-leave-to {
+      opacity: 0;
+      transform: translateX(20px)
+    }
+  </style>
 </head>
 <body>
 
+<div id="test">
+  <button @click="isShow= !isShow">toggle</button>
+  <transition name="move">
+    <p v-if="isShow">atguigu.com</p>
+  </transition>
+</div>
+
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el : '#test',
+    data : {
+      isShow: true
+    },
+    methods : {
 
+    },
+
+    computed : {
+
+    }
+  })
 </script>
 </body>
 </html>
