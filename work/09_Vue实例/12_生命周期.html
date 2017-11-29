@@ -5,8 +5,10 @@
   <title>12_生命周期</title>
 </head>
 <body>
-<div>
-
+<div id="test">
+  <p>{{msg}}</p>
+  <p ref="content">atguigu.com</p>
+  <button @click="destroyVM">杀死VM</button>
 </div>
 
 <!--
@@ -19,16 +21,71 @@
   2). 更新状态
     * beforeUpdate()
     * updated()
-  3). 销毁vue实例: vm.$destory()
-    * beforeDestory()
-    * destoryed()
+  3). 销毁vue实例: vm.$destroy()
+    * beforeDestroy()
+    * destroyed()
 2. 常用的生命周期方法
   created()/mounted(): 发送ajax请求, 启动定时器等异步任务
-  beforeDestory(): 做收尾工作, 如: 清除定时器
+  beforeDestroy(): 做收尾工作, 如: 清除定时器
 -->
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el: '#test',
+    data: {
+        msg: 'atguigu11111'
+    },
 
+    beforeCreate () { // 不能操作data
+      console.log('beforeCreate,', this.msg)
+    },
+
+    // 实现了数据代理
+
+    created () {// 可以操作data
+      console.log('created,', this.msg, this.$refs.content)
+    },
+
+    // 编译模板
+
+    beforeMount () {
+      console.log('beforeMount,', this.$refs.content)
+    },
+
+    // 挂载到页面
+
+    mounted () { // 可以操作data, 也可访问标签元素
+      console.log('mounted,', this.$refs.content)
+      // 执行初始化的异步操作(发送ajax, 设置定时器, 绑定自定义的事件监听(订阅消息))
+      this.intervalId = setInterval(() => {
+        console.log('定时器执行...')
+        this.msg = 'atguigu'+Date.now()
+      }, 1000)
+    },
+
+    beforeUpdate () {
+      console.log('beforeUpdate,')
+    },
+    updated () {
+      console.log('updated,')
+    },
+
+    beforeDestroy () {
+      console.log('beforeDestroy,')
+      // 做一些收尾的工作(清除定时器)
+      clearInterval(this.intervalId)
+    },
+    destroyed () {
+      console.log('destroyed,')
+    },
+
+    methods: {
+      destroyVM () {
+        console.log('destroyVM()')
+        this.$destroy()
+      }
+    }
+  })
 </script>
 </body>
 </html>
